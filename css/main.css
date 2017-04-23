@@ -1,0 +1,85 @@
+body {
+    background-color: #111111;
+}
+#my-video{
+    width: 100%;
+    height:100vh;
+}
+.container-fluid{
+    padding: 0;
+}
+.container-fluid > div{
+    padding: 0;
+}
+.dropdown-menu{
+  background-color: #222;
+}
+a{
+  color: #eee;
+}
+textarea{
+  resize: none;
+}
+#usrname{
+  background-color: #111;
+  border-color: black;
+  border-radius: 4px;
+}
+.form{
+  margin-left:15px;
+  margin-top: 15px;
+}
+.form-control{
+  background-color: #111;
+  border-color: black;
+  border-radius: 4px;
+  color: #bbb;
+}
+.btn-inverse{
+  background-color: #555;
+}
+#chat{
+  height:100%;
+}
+.message{
+  max-width: 100%;
+  margin: 0px;
+  padding-right: 20px;
+  word-break: break-all;
+}
+.chatbody{
+  position: absolute;
+  width: 100%;
+  top:50px;
+  height: -webkit-calc(100vh - 150px);
+  padding-left: 20px;
+  margin-right: 20px;
+  overflow-y: scroll;
+}
+.chatmain{
+  position: absolute;
+  width:100%;
+  min-height:100vh;
+  color:#eee;
+  font-weight: 200;
+  letter-spacing: 1px;
+  text-shadow:1px 1px 2px #000;
+}
+.chatfooter{
+  background-color: #222;
+  border: black thin solid;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 0;
+  min-height: 100px;
+  width: 100%;
+}
+.usersettings{
+  display: none;
+  position: absolute;
+  background-color: #222;
+  width: 100%;
+  min-height: 100px;
+  z-index: 2;
+  border: black thin solid;
+}

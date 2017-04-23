@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>BRETTY GUD</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="http://vjs.zencdn.net/5.11.6/video-js.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- If you'd like to support IE8 -->
+    <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+    <script src="http://vjs.zencdn.net/5.11.6/video.js"></script>
+    <script src="js/js.cookie.js"></script>
+    <script src="js/main.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="col-xs-9" id="vid">
+        <video id="my-video" class="video-js" controls preload="auto"
+        		   data-setup="{}">
+        			<source src="rtmp://dogspit.net/live/test" type='rtmp/mp4'>
+
+        			<p class="vjs-no-js">
+        			  To view this video please enable JavaScript, and consider upgrading to a web browser that
+        			  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+        			</p>
+        		  </video>
+      </div>
+
+		<script src="http://vjs.zencdn.net/5.11.6/video.js"></script>
+      <div class="col-xs-3" id="chat">
+        <div class="chatmain">
+
+          <div class="usersettings">
+            <a href="#" id="close" style="margin:15px 0px 0px 15px;">x</a>
+            <div class="form">
+              <input type="text" id="usrname" name="" value="" placeholder="username" style="margin:0px;">
+              <input type="color" id="color" name="" value="#eeeeee">
+              <button type="button" id="save" class="btn btn-inverse" name="button">save</button>
+            </div>
+          </div>
+
+          <div class="chatheader">
+            <nav class="navbar navbar-inverse">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <!-- <a class="navbar-brand" href="#"></a> -->
+                </div>
+                <div class="">
+                  <form class="">
+                      <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" role="button"
+                      aria-haspopup="true" aria-expanded="false" style="position:absolute;padding-right:0;left:15px;">
+                      <span class="glyphicon glyphicon-cog" style="margin-right:0px;"></span></a>
+
+                      <ul class="dropdown-menu">
+                        <div class=""><a href="#">Switch Theme</a></div>
+                        <div class=""><a href="#" id="settings">User Settings</a></div>
+                      </ul>
+                      <span class="navbar-brand" id="viewers" style="position:absolute;right:0;"></span>
+                  </form>
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav>
+          </div>
+
+
+
+          <div class="chatbody">
+            <div class="message">
+
+            </div>
+          </div>
+
+
+          <div class="chatfooter">
+            <div class="row" style="margin:10px;">
+              <div class="col-xs-9" style="padding:0;">
+                <textarea class="form-control" rows="3" cols="2" id="msg" ></textarea>
+              </div>
+              <div class="col-xs-3" style="padding:0;">
+                <button type="button" class="btn btn-inverse" id="send" style="height:74px;width:100%;">Send</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAk5SBorUo8lpRy-5bfNVPZkd343Widx58",
+    authDomain: "yattachat-6a2f7.firebaseapp.com",
+    databaseURL: "https://yattachat-6a2f7.firebaseio.com",
+    projectId: "yattachat-6a2f7",
+    storageBucket: "yattachat-6a2f7.appspot.com",
+    messagingSenderId: "412162382437"
+  };
+  firebase.initializeApp(config);
+</script>
