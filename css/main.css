@@ -92,6 +92,6 @@ textarea{
   background-color: #222;
   width: 100%;
   /*min-height: 50px;*/
-  z-index: 2;
+  z-index: 1;
   border: black thin solid;
 }

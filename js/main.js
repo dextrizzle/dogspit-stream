@@ -8,7 +8,7 @@ $(document).ready(function(){
     let userlink = '';
     firebase.database().ref('viewers').once('value').then(function(snapshot) {
       currentviewers = snapshot.val().viewers || 0;
-      firebase.database().ref('viewers').set({viewers: currentviewers+1})
+      // firebase.database().ref('viewers').set({viewers: currentviewers+1})
       userlink = firebase.database().ref('users').push([`${Cookies.get('name')}`,`${Cookies.get('color')}`,currentviewers+1]);
 
       // firebase.database().ref('users').push([`${'name'}`,`${'color'}`]);
@@ -84,6 +84,7 @@ $(document).ready(function(){
 
           $('.userlist').append(`<font color="${color}">${name}`+' <br>');
         }
+        firebase.database().ref('viewers').set({viewers: Object.keys(views).length})
     });
 
     $('#settings').click(function(){
@@ -95,6 +96,8 @@ $(document).ready(function(){
     $('#viewers').click(function(){
       $('.userlist').slideToggle();
     })
+
+
     $('#save').click(function(){
       $('.usersettings').slideUp();
       let name = $('#usrname').val();
@@ -103,7 +106,26 @@ $(document).ready(function(){
       Cookies.set('name',name,{expires:365});
       Cookies.remove('color');
       Cookies.set('color',color,{expires:365});
-    })
+
+      firebase.database().ref('users').once('value').then(function(snapshot){
+        currentusers = snapshot.val();
+        Object.values(currentusers).forEach(function(e){
+          if(e[2] == currentviewers+1){
+              userlink.remove(function(error) {
+                if(error)
+                  console.log("Uh oh!");
+                else
+                  console.log("success");
+              });
+              userlink = firebase.database().ref('users').push([`${Cookies.get('name')}`,`${Cookies.get('color')}`,currentviewers]);
+          }
+        });
+      });
+
+    });
+
+
+
     $(window).on('beforeunload', function(){
 
       firebase.database().ref('users').once('value').then(function(snapshot){
@@ -117,9 +139,7 @@ $(document).ready(function(){
                   console.log("success");
               });
           }
-          else
-            console.log('false');
-          })
+        });
       });
       firebase.database().ref('viewers').set({viewers: currentviewers})
     })
