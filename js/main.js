@@ -5,9 +5,13 @@ $(document).ready(function(){
 	    Cookies.set('color','#eeeeee');
 
     let currentviewers = 0;
+    let userlink = '';
     firebase.database().ref('viewers').once('value').then(function(snapshot) {
       currentviewers = snapshot.val().viewers || 0;
       firebase.database().ref('viewers').set({viewers: currentviewers+1})
+      userlink = firebase.database().ref('users').push([`${Cookies.get('name')}`,`${Cookies.get('color')}`,currentviewers+1]);
+
+      // firebase.database().ref('users').push([`${'name'}`,`${'color'}`]);
     })
 
     $('#usrname').val(Cookies.get('name'));
@@ -69,11 +73,27 @@ $(document).ready(function(){
         $('#viewers').html(views+' <span class="glyphicon glyphicon-eye-open"></span>');
     });
 
+    firebase.database().ref('users').on('value',
+    function(data) {
+        const views = data.val();
+        $('.userlist').html('');
+        for (let key in views){
+          let name = views[key][0];
+          let color = views[key][1];
+          let id = views[key][2];
+
+          $('.userlist').append(`<font color="${color}">${name}`+' <br>');
+        }
+    });
+
     $('#settings').click(function(){
       $('.usersettings').slideDown();
     })
     $('#close').click(function(){
       $('.usersettings').slideUp();
+    })
+    $('#viewers').click(function(){
+      $('.userlist').slideToggle();
     })
     $('#save').click(function(){
       $('.usersettings').slideUp();
@@ -85,6 +105,22 @@ $(document).ready(function(){
       Cookies.set('color',color,{expires:365});
     })
     $(window).on('beforeunload', function(){
+
+      firebase.database().ref('users').once('value').then(function(snapshot){
+        currentusers = snapshot.val();
+        Object.values(currentusers).forEach(function(e){
+          if(e[2] == currentviewers+1){
+              userlink.remove(function(error) {
+                if(error)
+                  console.log("Uh oh!");
+                else
+                  console.log("success");
+              });
+          }
+          else
+            console.log('false');
+          })
+      });
       firebase.database().ref('viewers').set({viewers: currentviewers})
     })
 });
