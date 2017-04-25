@@ -108,20 +108,14 @@ $(document).ready(function(){
       Cookies.set('color',color,{expires:365});
 
       firebase.database().ref('users').once('value').then(function(snapshot){
-        currentusers = snapshot.val();
-        Object.values(currentusers).forEach(function(e){
-          if(e[2] == currentviewers+1){
-              userlink.remove(function(error) {
-                if(error)
-                  console.log("Uh oh!");
-                else
-                  console.log("success");
-              });
-              userlink = firebase.database().ref('users').push([`${Cookies.get('name')}`,`${Cookies.get('color')}`,currentviewers]);
-          }
-        });
-      });
-
+        userlink.remove(function(error) {
+          if(error)
+            console.log("Uh oh!");
+          else
+            console.log("success");
+        })
+        userlink = firebase.database().ref('users').push([`${Cookies.get('name')}`,`${Cookies.get('color')}`,currentviewers]);
+      })
     });
 
 
@@ -129,18 +123,13 @@ $(document).ready(function(){
     $(window).on('beforeunload', function(){
 
       firebase.database().ref('users').once('value').then(function(snapshot){
-        currentusers = snapshot.val();
-        Object.values(currentusers).forEach(function(e){
-          if(e[2] == currentviewers+1){
-              userlink.remove(function(error) {
-                if(error)
-                  console.log("Uh oh!");
-                else
-                  console.log("success");
-              });
-          }
-        });
-      });
-      firebase.database().ref('viewers').set({viewers: currentviewers})
+        userlink.remove(function(error) {
+          if(error)
+            console.log("Uh oh!");
+          else
+            console.log("success");
+        })
+      })
+      // firebase.database().ref('viewers').set({viewers: currentviewers})
     })
 });
