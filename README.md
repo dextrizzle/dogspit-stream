@@ -1,6 +1,6 @@
 # dogspit-stream
 
 todo
--switch theme
+-store theme(cookie)
 -admin messages
 -commands
