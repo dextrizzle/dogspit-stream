@@ -5,7 +5,74 @@ $(document).ready(function(){
 	    Cookies.set('color','#eeeeee');
     if(!Cookies.get('theme'))
         Cookies.set('theme','dark');
-
+    $( window ).resize(function() {
+        $('.chatbody').scrollTop($('.chatbody')[0].scrollHeight);
+    });
+    function darkTheme(){
+        Cookies.set('theme','dark');
+        $('body').css('background-color','#111');
+        $('.btn-inverse').css('background-color','#555');
+        $('.btn-inverse').css('border-color','#000');
+        $('.btn-inverse').css('color','#eee');
+        $('.chatmain').css('color','#eee');
+        $('.chatmain').css('text-shadow','1px 1px 2px #000');
+        $('.chatfooter').css('background-color','#222');
+        $('.chatfooter').css('border-color','#000');
+        $('.form-control').css('background-color','#111');
+        $('.form-control').css('border-color','#000');
+        $('.form-control').css('color','#bbb')
+        $('.glyphicon').css('color','#999');
+        $('.navbar-inverse').css('background-color','#222');
+        $('.navbar-inverse').css('border-color','#111');
+        $('.message').css('color','#eee');
+        $('.message').css('text-shadow','1px 1px 2px #000');
+        $('.userlist').css('background-color','#222');
+        $('.userlist').css('border-color','#000');
+        $('#viewers').css('color','#999');
+        $('.dropdown-menu').css('background-color','#222');
+        $('.dropdown-menu').css('border-color','#000');
+        $('.dropdown-menu > div > a').css('color','#eee');
+    }
+    function lightTheme(){
+        Cookies.set('theme','light');
+        $('body').css('background-color','#ccc');
+        $('.btn-inverse').css('background-color','#ccc');
+        $('.btn-inverse').css('border-color','#bbb');
+        $('.btn-inverse').css('color','#555');
+        $('.chatmain').css('color','#111');
+        $('.chatmain').css('text-shadow','2px 2px 3px #eee');
+        $('.chatfooter').css('background-color','#eee');
+        $('.chatfooter').css('border-color','#bbb');
+        $('.form-control').css('background-color','#ccc');
+        $('.form-control').css('border-color','#bbb');
+        $('.form-control').css('color','#555')
+        $('.glyphicon').css('color','#777');
+        $('.navbar-inverse').css('background-color','#eee');
+        $('.navbar-inverse').css('border-color','#bbb');
+        $('.message').css('color','#555');
+        $('.message').css('text-shadow','1px 1px 3px #eee');
+        $('.userlist').css('background-color','#eee');
+        $('.userlist').css('border-color','#aaa');
+        $('#viewers').css('color','#777');
+        $('.dropdown-menu').css('background-color','#eee');
+        $('.dropdown-menu').css('border-color','#aaa');
+        $('.dropdown-menu > div > a').css('color','#555');
+    }
+    function themeSwitch(){
+      if(Cookies.get('theme')=='dark'){
+        lightTheme();
+      } else {
+        darkTheme();
+      }
+    }
+    function themeLoad(){
+      if(Cookies.get('theme')=='dark'){
+        darkTheme();
+      } else {
+        lightTheme();
+      }
+    }
+    themeLoad();
     let currentviewers = 0;
     let userlink = '';
     firebase.database().ref('viewers').once('value').then(function(snapshot) {
@@ -100,55 +167,7 @@ $(document).ready(function(){
       $('.userlist').slideToggle();
     })
     $('#theme').click(function(){
-      if(Cookies.get('theme')=='dark'){
-        Cookies.set('theme','light');
-        $('body').css('background-color','#ccc');
-        $('.btn-inverse').css('background-color','#ccc');
-        $('.btn-inverse').css('border-color','#bbb');
-        $('.btn-inverse').css('color','#555');
-        $('.chatmain').css('color','#111');
-        $('.chatmain').css('text-shadow','2px 2px 3px #eee');
-        $('.chatfooter').css('background-color','#eee');
-        $('.chatfooter').css('border-color','#bbb');
-        $('.form-control').css('background-color','#ccc');
-        $('.form-control').css('border-color','#bbb');
-        $('.form-control').css('color','#555')
-        $('.glyphicon').css('color','#777');
-        $('.navbar-inverse').css('background-color','#eee');
-        $('.navbar-inverse').css('border-color','#bbb');
-        $('.message').css('color','#555');
-        $('.message').css('text-shadow','1px 1px 3px #eee');
-        $('.userlist').css('background-color','#eee');
-        $('.userlist').css('border-color','#aaa');
-        $('#viewers').css('color','#777');
-        $('.dropdown-menu').css('background-color','#eee');
-        $('.dropdown-menu').css('border-color','#aaa');
-        $('.dropdown-menu > div > a').css('color','#555');
-      } else {
-          Cookies.set('theme','dark');
-        $('body').css('background-color','#111');
-        $('.btn-inverse').css('background-color','#555');
-        $('.btn-inverse').css('border-color','#000');
-        $('.btn-inverse').css('color','#eee');
-        $('.chatmain').css('color','#eee');
-        $('.chatmain').css('text-shadow','1px 1px 2px #000');
-        $('.chatfooter').css('background-color','#222');
-        $('.chatfooter').css('border-color','#000');
-        $('.form-control').css('background-color','#111');
-        $('.form-control').css('border-color','#000');
-        $('.form-control').css('color','#bbb')
-        $('.glyphicon').css('color','#999');
-        $('.navbar-inverse').css('background-color','#222');
-        $('.navbar-inverse').css('border-color','#111');
-        $('.message').css('color','#eee');
-        $('.message').css('text-shadow','1px 1px 2px #000');
-        $('.userlist').css('background-color','#222');
-        $('.userlist').css('border-color','#000');
-        $('#viewers').css('color','#999');
-        $('.dropdown-menu').css('background-color','#222');
-        $('.dropdown-menu').css('border-color','#000');
-        $('.dropdown-menu > div > a').css('color','#eee');
-      }
+      themeSwitch();
     })
 
 
