@@ -3,7 +3,7 @@ $(document).ready(function(){
     	Cookies.set('name','anonymous');
     if(!Cookies.get('color'))
 	    Cookies.set('color','#eeeeee');
-
+    
     let currentviewers = 0;
     let userlink = '';
     firebase.database().ref('viewers').once('value').then(function(snapshot) {
@@ -64,7 +64,7 @@ $(document).ready(function(){
               <br>
           `);
         }
-        $('.message').scrollTop($('.message')[0].scrollHeight);
+        $('.chatbody').scrollTop($('.chatbody')[0].scrollHeight);
     });
 
     firebase.database().ref('viewers').on('value',
