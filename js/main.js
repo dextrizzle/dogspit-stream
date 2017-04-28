@@ -3,7 +3,9 @@ $(document).ready(function(){
     	Cookies.set('name','anonymous');
     if(!Cookies.get('color'))
 	    Cookies.set('color','#eeeeee');
-    
+    if(!Cookies.get('theme'))
+        Cookies.set('theme','dark');
+
     let currentviewers = 0;
     let userlink = '';
     firebase.database().ref('viewers').once('value').then(function(snapshot) {
@@ -98,7 +100,8 @@ $(document).ready(function(){
       $('.userlist').slideToggle();
     })
     $('#theme').click(function(){
-      if($('.chatmain').css('color')=="rgb(238, 238, 238)"){
+      if(Cookies.get('theme')=='dark'){
+        Cookies.set('theme','light');
         $('body').css('background-color','#ccc');
         $('.btn-inverse').css('background-color','#ccc');
         $('.btn-inverse').css('border-color','#bbb');
@@ -122,6 +125,7 @@ $(document).ready(function(){
         $('.dropdown-menu').css('border-color','#aaa');
         $('.dropdown-menu > div > a').css('color','#555');
       } else {
+          Cookies.set('theme','dark');
         $('body').css('background-color','#111');
         $('.btn-inverse').css('background-color','#555');
         $('.btn-inverse').css('border-color','#000');
